@@ -68,7 +68,7 @@ local ffaColors = {
 	"#4A4376", -- 26
 	"#773A01", -- 27
 	"#B7EA63", -- 28
-	"#9F0D05", -- 29
+	"#764A4A", -- 29
 	"#7EB900", -- 30
 }
 -- delete excess so a table shuffe wont use the colors added on the bottom
@@ -77,6 +77,68 @@ if #ffaColors > #teamList-1 then
 		ffaColors[i] = nil
 	end
 end
+
+-- Tailwind v4 color palette (Mostly brightness 200 to 800)
+-- Note: the official color palette used P3 colors (which are meant for HDR displays), this is the fallback RGB colors.
+-- RGB value are listed as integer values to skip the call to hex2RGB()
+local gradients = {
+	blue = {{190, 219, 255}, {142, 197, 255}, {81, 162, 255}, {43, 127, 255}, {21, 93, 252}, {20, 71, 230}, {25, 60, 184}},
+	cyan = {{162, 244, 253}, {83, 234, 253}, {0, 211, 242}, {0, 184, 219}, {0, 146, 184}, {0, 117, 149}, {0, 95, 120}},
+	violet = {{221, 214, 255}, {196, 180, 255}, {166, 132, 255}, {142, 81, 255}, {127, 34, 254}, {112, 8, 231}, {93, 14, 192}, {77, 23, 154}},
+	fusia = {{246, 207, 255}, {244, 168, 255}, {237, 106, 255}, {225, 42, 251}, {200, 0, 222}, {168, 0, 183}, {138, 1, 148}},
+	pink = {{253, 165, 213}, {251, 100, 182}, {246, 51, 154}, {230, 0, 118}, {198, 0, 92}, {163, 0, 76}, {134, 16, 67}},
+	red = {{255, 201, 201}, {255, 162, 162}, {255, 100, 103}, {251, 44, 54}, {231, 0, 11}, {193, 0, 7}, {159, 7, 18}},
+	orange = {{255, 214, 167}, {255, 184, 106}, {255, 137, 4}, {255, 105, 0}, {245, 73, 0}, {202, 53, 0}},
+	yellow = {{255, 240, 133}, {255, 223, 32}, {253, 199, 0}, {240, 177, 0}, {208, 135, 0}, {166, 95, 0}, {137, 75, 0}},
+	green = {{185, 248, 207}, {123, 241, 168}, {5, 223, 114}, {0, 201, 80}, {0, 166, 62}, {0, 130, 54}, {1, 102, 48}},
+	lime = {{236, 252, 202}, {216, 249, 153}, {187, 244, 81}, {154, 230, 0}, {124, 207, 0}, {94, 165, 0}, {73, 125, 0}, {60, 99, 0}, {53, 83, 14}},
+	teal = {{150, 247, 228}, {70, 236, 213}, {0, 213, 190}, {0, 187, 167}, {0, 150, 137}, {0, 120, 111}, {0, 95, 90}},
+	sky = {{184, 230, 254}, {116, 212, 255}, {0, 188, 255}, {0, 166, 244}, {0, 132, 209}, {0, 105, 168}, {0, 89, 138}},
+}
+
+local allGrandientNames = {"blue", "red", "green", "yellow", "fusia", "teal", "orange", "pink", "lime", "violet", "cyan", "sky"}
+
+local gradientGroupPerNumTeams = {
+	-- One team
+	{
+		{"blue", "sky", "violet", "green", "lime"}, -- cold
+	},
+	-- 2 teams
+	{
+		{"blue", "sky", "violet", "green", "lime"}, -- cold
+		{"red", "pink", "fusia", "orange", "yellow"}, -- warm
+	},
+	-- 3 teams
+	{
+		{"blue", "sky", "violet"}, -- blue
+		{"red", "orange", "yellow"}, -- red
+		{"green", "lime", "teal"}, -- green
+	},
+	-- 4 teams
+	{
+		{"blue", "sky", "violet"}, -- blue
+		{"red", "pink", "fusia"}, -- red pink
+		{"green", "lime", "teal"}, -- green
+		{"orange", "yellow"},
+	},
+	-- 5 teams
+	{
+		{"blue", "sky"}, -- blue
+		{"red", "pink"}, -- red pink
+		{"green", "lime"}, -- green
+		{"orange", "yellow"},
+		{"violet", "fusia"},
+	},
+	-- 6 teams
+	{
+		{"blue", "sky"}, -- blue
+		{"red", "pink"}, -- red pink
+		{"green", "lime"}, -- green
+		{"orange", "yellow"},
+		{"violet", "fusia"},
+		{"teal", "cyan"},
+	},
+}
 
 
 local survivalColors = {
@@ -113,7 +175,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Two Teams
+	{ -- Two Teams (40 colors)
 		{ -- First Team (Cool)
 			"#0B3EF3", --1
 			"#0CE908", --2
@@ -160,7 +222,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Three Teams
+	{ -- Three Teams (24 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#09F5F5", -- 2
@@ -193,7 +255,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Four Teams
+	{ -- Four Teams (24 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#7CA1FF", -- 2
@@ -228,7 +290,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Five Teams
+	{ -- Five Teams  (25 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#7CA1FF", -- 2
@@ -266,7 +328,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Six Teams
+	{ -- Six Teams (24 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#7CA1FF", -- 2
@@ -305,7 +367,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Seven Teams
+	{ -- Seven Teams (21 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#7CA1FF", -- 2
@@ -343,7 +405,7 @@ local teamColors = {
 		},
 	},
 
-	{ -- Eight Teams
+	{ -- Eight Teams (24 colors)
 		{ -- First Team (Blue)
 			"#004DFF", -- 1
 			"#7CA1FF", -- 2
@@ -407,6 +469,29 @@ local iconDevModeColors = {
 local iconDevMode = Spring.GetModOptions().teamcolors_icon_dev_mode
 local iconDevModeColor = iconDevModeColors[iconDevMode]
 
+-- Get color of a gradient by interpolating between the colors in the gradient.
+-- The gradient is a list of RGB colors
+-- Assumed ratio is in [0, 1]
+local function interpolateGradient(gradient, ratio)
+	if ratio >= 1.0 then
+		return gradient[#gradient]
+	end
+	-- For instance, with a gradient of 3 colors and ratio = 0.6
+	-- gradientRatio = 0.6 * (3 - 1) = 1.2
+	local gradientRatio = ratio * (#gradient - 1)
+	-- colorId = floor(1.2) = 1
+	local colorId = math.floor(gradientRatio)
+	local colorA = gradient[colorId + 1]
+	local colorB = gradient[colorId + 2]
+	-- lerpRatio = 1.2 - 1 = 0.2
+	local lerpRatio = gradientRatio - colorId
+
+	-- Interpolate between each RGB value in colorA and colorB
+	return {
+		math.clamp(math.floor((colorB[1] - colorA[1]) * lerpRatio + colorA[1]), 0, 255),
+		math.clamp(math.floor((colorB[2] - colorA[2]) * lerpRatio + colorA[2]), 0, 255),
+		math.clamp(math.floor((colorB[3] - colorA[3]) * lerpRatio + colorA[3]), 0, 255)}
+end
 
 local function shuffleTable(Table)
 	local originalTable = {}
@@ -449,6 +534,158 @@ local teamColorsTable = {}
 local trueTeamColorsTable = {} -- run first as if we were specs so when we become specs, we can restore the true intended team colors
 local trueFfaColors = table.copy(ffaColors) -- run first as if we were specs so when we become specs, we can restore the true intended ffa colors
 local trueSurvivalColors = table.copy(survivalColors) -- run first as if we were specs so when we become specs, we can restore the true intended survival colors
+
+-- Legacy procedurally generate a color for given team ID and ally team ID.
+-- Each ally team is assigned a color from the ffaColors table. The color is generated by changing the brightness of the assigned color and
+-- by randomly changing the RGB value.
+local function legacyFFAColorGeneration(teamID, allyTeamID)
+	local color = hex2RGB(ffaColors[allyTeamID+1] or '#333333')
+
+	local maxIterations =  math.floor((allyTeamID+1)/(#ffaColors))
+	-- So if you're the Nth player of a team with M players:
+	-- brightnessVariation = (0.6 - N / M) * 255   , so the range is in -0.4*255 to 0.6*255  or -102 to 153
+	local brightnessVariation = (0.6 - ((1 / #Spring.GetTeamList(allyTeamID)) * dimmingCount[allyTeamID])) * 255
+	-- brightnessVariation *= math.min(M*0.7 - 1, 1)
+	-- For M == 1 -> -0.3
+	-- For M == 2 -> 0.4
+	-- For M >= 3 -> 1
+	brightnessVariation = brightnessVariation * math.min((#Spring.GetTeamList(allyTeamID) * 0.7)-1, 1)	-- dont change brightness too much in tiny teams
+
+	-- Basically maxColorVariation gets lower and lower as the number of team increase
+	-- maxColorVariation = 120 / max(1, num_team)
+	-- So for #P team        1   2   3   4   5   6   7   8
+	-- maxColorVariation = 120, 60, 40, 30, 24, 20, 17, 15...
+	local maxColorVariation = (120 / math.max(1, allyTeamCount-1))
+	if #Spring.GetTeamList(allyTeamID) == 1 then
+		brightnessVariation = 0
+		maxColorVariation = 0
+	end
+	-- Basically if there are more player than the table of ffacolors
+	-- This is make no sense, because this is trying to add a per team variation, instead of a per player variation
+	if maxIterations > 1 then
+		-- iteration = 1 + math.floor((allyTeamID+1) / 30 )
+		-- iteration = 1 + (allyTeamID+1) // 30
+		local iteration = 1 + math.floor((allyTeamID+1)/(#ffaColors))
+		-- ffacolor = (allyTeamID+1) - (#ffaColors*(iteration-1)) + 1
+		--          = (allyTeamID+1) - (30*((allyTeamID+1) // 30)) + 1
+		--          = (allyTeamID+1) % 30
+		local ffaColor = (allyTeamID+1) - (#ffaColors*(iteration-1)) + 1
+		if iteration ~= 1 then
+			color = hex2RGB(ffaColors[ffaColor])
+		end
+		if iteration == 1 then
+			color[1] = color[1] + 40
+			color[2] = color[2] + 40
+			color[3] = color[3] + 40
+		elseif iteration == 2 then
+			color[1] = color[1] - 70
+			color[2] = color[2] - 70
+			color[3] = color[3] - 70
+		elseif iteration == 3 then
+			color[1] = color[1] + 130
+			color[2] = color[2] + 130
+			color[3] = color[3] + 130
+		end
+	end
+	if teamID == gaiaTeamID then
+		brightnessVariation = 0
+		maxColorVariation = 0
+		color = hex2RGB(gaiaGrayColor)
+	end
+	-- = clamp(floor( r + brightnessVariation + 2 * random * maxColorVariation - maxColorVariation)
+	--  ), 0, 255)
+	-- = clamp(floor( r + brightnessVariation + (2 * random - 1.0) * maxColorVariation)
+	--  ), 0, 255)
+	-- = clamp(floor( r + brightnessVariation + random(-1., 1.) * maxColorVariation)
+	--  ), 0, 255)
+	-- brightnessVariation is between -0.4*255 to 0.6*255 for large team
+	color[1] = math.clamp(math.floor(color[1] + brightnessVariation + ((teamRandoms[teamID][1] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
+	color[2] = math.clamp(math.floor(color[2] + brightnessVariation + ((teamRandoms[teamID][2] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
+	color[3] = math.clamp(math.floor(color[3] + brightnessVariation + ((teamRandoms[teamID][3] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
+	return color
+end
+
+-- Procedurally generate a color for given team ID and ally team ID.
+-- Each ally team is assigned N gradients and the player's color is generated by sampling the color gradient(s).
+local function ffaColorGeneration(teamID, allyTeamID)
+	if teamID == gaiaTeamID then
+		return hex2RGB(gaiaGrayColor)
+	end
+
+	-- Asumptions: The last ally team is gaia and can be ignored
+	local totalNumAllyTeams = allyTeamCount
+	local numPlayerInTeam = #Spring.GetTeamList(allyTeamID)
+	-- 0-indexed, [0, numPlayerInTeam[
+	local nthPlayerInTeam = dimmingCount[allyTeamID] - 1
+	local useGradientGroup = not (not gradientGroupPerNumTeams[totalNumAllyTeams])
+
+	-- Case 1: If gradient groups are used, each ally team is assigned N gradients
+	-- e.g. team #1 warm gradient (red, orange, yellow) vs team #2 cold gradients (blue, green, purple)
+	if useGradientGroup then
+		local teamGradientGroup = gradientGroupPerNumTeams[totalNumAllyTeams][allyTeamID + 1]
+
+		-- (edge case) If there are more gradient than player, each player just take the middle color of a gradient
+		if numPlayerInTeam <= #teamGradientGroup then
+			local gradient = gradients[teamGradientGroup[nthPlayerInTeam + 1]]
+			local ratioWithinGradient = 0.5
+			return interpolateGradient(gradient, ratioWithinGradient)
+		end
+		-- Regular case, where we sample thru the group of gradients
+
+		-- Find which gradient is used by the player
+		local playerRatio = nthPlayerInTeam / numPlayerInTeam
+		local playerGradientId = math.floor(playerRatio * #teamGradientGroup)
+		local playerGradientName = teamGradientGroup[playerGradientId + 1]
+		local gradient = gradients[playerGradientName]
+
+		local ratioWithinGradient = playerRatio * #teamGradientGroup - playerGradientId 
+		return interpolateGradient(gradient, ratioWithinGradient)
+	end
+	 -- Case 2: Each ally team use one gradient, this gradient might be share with other ally team(s)
+	 -- e.g one team is bright green, another is dark green
+
+	local gradientId = math.floor(allyTeamID % #allGrandientNames)
+	local gradName = allGrandientNames[gradientId + 1]
+	local gradient = gradients[gradName]
+
+	-- How many ally team share the same gradient?
+	local numAllyTeamWithGradient = math.floor(totalNumAllyTeams / #allGrandientNames)
+	-- Not all gradients will share the same number of ally team
+	if gradientId < totalNumAllyTeams % #allGrandientNames then
+		numAllyTeamWithGradient = numAllyTeamWithGradient + 1
+	end
+	local nthAllyTeamWithGradient = math.floor(allyTeamID / #allGrandientNames)
+
+	-- If there is only a single player in a team, take the color at the center of the gradient
+	local playerGradientRatio = 0.5
+	-- Otherwise, we distribute the players amount the gradient
+	if numPlayerInTeam > 1 then
+		-- We divide by numPlayerInTeam-1, not by numPlayerInTeam, because we want this ratio to be between [0,1], not [0, 1[
+		playerGradientRatio = nthPlayerInTeam / (numPlayerInTeam-1)
+		local ratioPerPlayer = 1.0 / (numPlayerInTeam-1)
+
+		-- When there are fewer than 5 players in an ally team, the brighness change between player is large, so instead of sampling the entire gradient
+		-- we only sample near the middle of the gradient.
+		local maxPerPlayerRatio = 0.25
+		if ratioPerPlayer > maxPerPlayerRatio then
+			-- Basically, space every player by 25% of the gradient, but the range is centered on the middle of the gradient
+			-- player 0th in ally team of 3 players:
+			-- = 0.5 + 0.25 * (N - (M-1) / 2)
+			-- = 0.5 + 0.25 * (0 - 2 / 2)
+			-- = 0.5 - 0.25
+			-- So the playerGradientRatio will be 0.25, 0.5, 0.75 for this team
+			playerGradientRatio = 0.5 + maxPerPlayerRatio * (nthPlayerInTeam - (numPlayerInTeam-1) / 2.0)
+		end
+	end
+
+	-- If multiple ally team share the same gradient, create a gap between the end of one team's and the start of the next one
+	if numAllyTeamWithGradient > 1 and nthAllyTeamWithGradient + 1 ~= numAllyTeamWithGradient then
+		playerGradientRatio = 0.9 * playerGradientRatio
+	end
+	local gradientRatio =  playerGradientRatio / numAllyTeamWithGradient + nthAllyTeamWithGradient / numAllyTeamWithGradient
+
+	return interpolateGradient(gradient, gradientRatio)
+end
 
 local function setupTeamColor(teamID, allyTeamID, isAI, localRun)
 	if iconDevModeColor then
@@ -528,55 +765,28 @@ local function setupTeamColor(teamID, allyTeamID, isAI, localRun)
 		}
 		survivalColorNum = survivalColorNum + 1 -- Will start from the next color next time
 
-	-- auto ffa gradient colored for huge player games
+	-- Auto FFA gradient colored for huge player games
 	elseif useFFAColors or
+	-- or Number of player in last non-gaia team is larger than one and there is not a color palette for it
 		(#Spring.GetTeamList(allyTeamCount-1) > 1 and (not teamColors[allyTeamCount] or not teamColors[allyTeamCount][1][#Spring.GetTeamList(allyTeamCount-1)]))
+	-- or There is more than 29 players (ignores gaia)
 		or #Spring.GetTeamList() > 30
-		or (#Spring.GetTeamList(allyTeamCount-1) == 1 and not ffaColors[allyTeamCount])
+	-- or the number of players in the last non-gaia team is one and there is more than team than ffaColor
+	    or (#Spring.GetTeamList(allyTeamCount-1) == 1 and not ffaColors[allyTeamCount])
 	then
-		local color = hex2RGB(ffaColors[allyTeamID+1] or '#333333')
-		local maxIterations =  math.floor((#teamList-1) / #ffaColors)
-		local brightnessVariation = (0.6 - ((1 / #Spring.GetTeamList(allyTeamID)) * dimmingCount[allyTeamID])) * 255
-		brightnessVariation = brightnessVariation * math.min((#Spring.GetTeamList(allyTeamID) * 0.7)-1, 1)	-- dont change brightness too much in tiny teams
-		local maxColorVariation = (120 / math.max(1, allyTeamCount-1))
-		if #Spring.GetTeamList(allyTeamID) == 1 then
-			brightnessVariation = 0
-			maxColorVariation = 0
+		local color = nil
+		-- If there is less than 30 players and only one player per ally team use legacy FFA colors
+		if #Spring.GetTeamList(allyTeamCount-1) == 1 and #Spring.GetTeamList() -1 <= 30 then
+			color = legacyFFAColorGeneration(teamID, allyTeamID)
+		else
+			color = ffaColorGeneration(teamID, allyTeamID)
 		end
-
-		if maxIterations > 1 then
-			local iteration = 1 + math.floor((allyTeamID+1)/(#ffaColors))
-			local ffaColor = (allyTeamID+1) - (#ffaColors*(iteration-1)) + 1
-			if iteration ~= 1 then
-				color = hex2RGB(ffaColors[ffaColor])
-			end
-			if iteration == 1 then
-				color[1] = color[1] + 40
-				color[2] = color[2] + 40
-				color[3] = color[3] + 40
-			elseif iteration == 2 then
-				color[1] = color[1] - 70
-				color[2] = color[2] - 70
-				color[3] = color[3] - 70
-			elseif iteration == 3 then
-				color[1] = color[1] + 130
-				color[2] = color[2] + 130
-				color[3] = color[3] + 130
-			end
-		end
-		if teamID == gaiaTeamID then
-			brightnessVariation = 0
-			maxColorVariation = 0
-			color = hex2RGB(gaiaGrayColor)
-		end
-		color[1] = math.clamp(math.floor(color[1] + brightnessVariation + ((teamRandoms[teamID][1] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
-		color[2] = math.clamp(math.floor(color[2] + brightnessVariation + ((teamRandoms[teamID][2] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
-		color[3] = math.clamp(math.floor(color[3] + brightnessVariation + ((teamRandoms[teamID][3] * (maxColorVariation * 2)) - maxColorVariation)), 0, 255)
 		teamColorsTable[teamID] = {
 			r = color[1],
 			g = color[2],
 			b = color[3],
 		}
+	-- Use the color palette defined in the teamColors table
 	else
 		if not teamSizes[allyTeamID] then
 			allyTeamNum = allyTeamNum + 1
@@ -591,13 +801,12 @@ local function setupTeamColor(teamID, allyTeamID, isAI, localRun)
 			end
 
 			-- Assigning R,G,B values with specified color variations
+			local color = hex2RGB(teamColors[allyTeamCount][teamSizes[allyTeamID][1]][teamSizes[allyTeamID][2]])
+			local colorVariation = teamSizes[allyTeamID][3] -- This is always zero
 			teamColorsTable[teamID] = {
-				r = hex2RGB(teamColors[allyTeamCount][teamSizes[allyTeamID][1]][teamSizes[allyTeamID][2]])[1]
-					+ math.random(-teamSizes[allyTeamID][3], teamSizes[allyTeamID][3]),
-				g = hex2RGB(teamColors[allyTeamCount][teamSizes[allyTeamID][1]][teamSizes[allyTeamID][2]])[2]
-					+ math.random(-teamSizes[allyTeamID][3], teamSizes[allyTeamID][3]),
-				b = hex2RGB(teamColors[allyTeamCount][teamSizes[allyTeamID][1]][teamSizes[allyTeamID][2]])[3]
-					+ math.random(-teamSizes[allyTeamID][3], teamSizes[allyTeamID][3]),
+				r = color[1] + math.random(-colorVariation, colorVariation),
+				g = color[2] + math.random(-colorVariation, colorVariation),
+				b = color[3] + math.random(-colorVariation, colorVariation),
 			}
 			teamSizes[allyTeamID][2] = teamSizes[allyTeamID][2] + 1 -- Will start from the next color next time
 
